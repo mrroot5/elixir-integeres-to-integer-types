@@ -30,7 +30,7 @@ defmodule SplitIntegersList do
         Keyword.put(keyword_list, key, updated_list)
     end
     
-    @spec parse_num(integer()) :: {:positive, :negative, :zero, integer()}
+    @spec parse_num(integer()) :: {:positive | :negative | :zero, integer()} | nil
     defp parse_num(num) when num > 0, do: {:positive, num}
     
     defp parse_num(num) when num < 0, do: {:negative, num}
@@ -45,3 +45,4 @@ nums = [1,-22,0,3,0,4,-5,3]
 
 result = Enum.reduce(nums, [positive: [], negative: [], zero: []], &SplitIntegersList.build_lists(&1, &2))
 IO.inspect(result)
+# [positive: [1, 3, 4, 3], negative: [-22, -5], zero: [0, 0]]
